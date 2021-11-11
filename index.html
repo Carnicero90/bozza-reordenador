@@ -25,7 +25,7 @@
             <div v-for="el, index in els"
             :class="index === index2 ? 'current' : ''"
             :style="swappin && cachedIndex === index ? 'position: absolute; width: 100%; font-weight: bold; z-index:999;top: ' + (clientY+5)+ 'px;' : ''"
-            @mousedown.left="swapping(index, $event)"
+            @mousedown.left="swapping(index, $event) @touchstart="swapping(index, $event)"
             @mouseover="changeIndex(index)"
             style="border: 1px solid black;"
             >
