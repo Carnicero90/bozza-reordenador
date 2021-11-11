@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <title>Document</title>
+    <style>
+        .swapping {
+            position: absolute;
+        }
+        .current {
+            background-color: beige;
+        }
+    </style>
+</head>
+<body>
+    <div id="root" :style="swappin ? 'user-select: none;' : ''" @mouseup="reorder" @mouseleave="reorder">
+        <h1>Bozza Reordenador</h1>
+        <div style="display: flex; flex-direction: column;" @mousemove="mouseMove($event)">
+            <div style="width:100%; height:10px; background-color: lavender;" @mouseover=changeIndex(-1)></div>
+            <div v-for="el, index in els"
+            :class="index === index2 ? 'current' : ''"
+            :style="swappin && cachedIndex === index ? 'position: absolute; width: 100%; font-weight: bold; z-index:999;top: ' + (clientY+5)+ 'px;' : ''"
+            @mousedown.left="swapping(index, $event)"
+            @mouseover="changeIndex(index)"
+            style="border: 1px solid black;"
+            >
+               <div 
+               style="padding: 2em;"
+               :style="cachedIndex == index ? 'background-color: lightgray' : ''">
+               <i :class="el.icona"></i>
+                <span>
+                    {{ el.nome }}
+
+                </span>
+               </div> 
+            </div>
+            <button @click="shuffle">Shuffle</button>
+
+        </div>
+    </div>
+</body>
+<script src="app.js"></script>
+</html>
